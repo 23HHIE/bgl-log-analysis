@@ -26,3 +26,6 @@ spark-warehouse/
 # OS
 .DS_Store
 .env
+
+# Private notes (local only, never push)
+NOTES.md

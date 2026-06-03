@@ -117,5 +117,5 @@ bgl-log-analysis/
 
 BlueGene/L supercomputer logs from Lawrence Livermore National Labs.
 - 2,679,601 log entries
-- 372 MB uncompressed
+- 355 MB uncompressed
 - Source: [Zenodo](https://zenodo.org/record/3227177)

@@ -1,0 +1,13 @@
+#Phase 1 batch processing
+version: "3.8"
+
+services:
+  spark-batch:
+    build:
+      context: ./batch
+    volumes:
+      - ./data:/data
+      - ./output:/output
+    environment:
+      - DATA_PATH=/data/BGL.log
+      - OUTPUT_PATH=/output
