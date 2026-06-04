@@ -4,7 +4,7 @@ from bgl_parser import load_bgl
 from questions import q10_top_days
 from questions import q14_kernrtsp_node
 from questions import q7_ddr_errors_weekly
-from questions import q18_lustre_fatal
+# from questions import q18_lustre_fatal
 
 def main():
     spark = SparkSession.builder.appName("BGL Log Analysis").getOrCreate()
@@ -21,8 +21,8 @@ def main():
     print("=== Question 7: Average Weekly DDR Errors ===")
     q7_ddr_errors_weekly.run(df)
 
-    print("=== Question 18: Earliest Fatal Lustre Mount Failed ===")
-    q18_lustre_fatal.run(df)
+    # print("=== Question 18: Earliest Fatal Lustre Mount Failed ===")
+    # q18_lustre_fatal.run(df)
 
     spark.stop()
 
