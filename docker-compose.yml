@@ -6,8 +6,9 @@ services:
     build:
       context: ./batch
     volumes:
-      - ./data:/data
+      - /Users/alex/mydata/BGL_extracted/BGL.log:/data/BGL.log
       - ./output:/output
+      - ./batch:/app
     environment:
       - DATA_PATH=/data/BGL.log
       - OUTPUT_PATH=/output
