@@ -27,7 +27,7 @@ A scalable distributed log analysis system built on **Lambda Architecture**, pro
 | Layer | Technology | Role |
 |-------|-----------|------|
 | **Batch** | PySpark | Answers 5 analytical questions over full dataset |
-| **Stream Ingest** | Kafka Producer | Simulates real-time log ingestion |
+| **Stream Ingest** | Kafka Producer | Simulates real-time log ingestion by replaying BGL.log |
 | **Stream Processing** | Spark Structured Streaming | Real-time event aggregation & alerting |
 | **API** | FastAPI + WebSocket | Serves batch results (REST) + live events (WS) |
 | **Frontend** | React | Real-time dashboard — live feed, charts, alerts |
@@ -106,12 +106,12 @@ bgl-log-analysis/
 
 ## Tech Stack
 
-- **PySpark 3.x** — distributed batch processing
-- **Apache Kafka** — distributed message streaming
+- **PySpark 3.5** — distributed batch processing
+- **Apache Kafka 3.7 (KRaft mode)** — distributed message streaming, no Zookeeper required
 - **Spark Structured Streaming** — real-time stream processing
 - **FastAPI** — async Python API with WebSocket support
-- **React** — real-time frontend dashboard
-- **Docker Compose** — local multi-container orchestration
+- **React 18** — real-time frontend dashboard
+- **Docker Compose** — local multi-container orchestration, single-command deployment
 
 ## Dataset
 
