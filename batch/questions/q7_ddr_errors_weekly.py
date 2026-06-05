@@ -14,3 +14,7 @@ def run(df):
     weekly.orderBy("week_start").show(truncate=False)
 
     avg_result.show()
+    return {
+        "weekly_counts": [row.asDict() for row in weekly.collect()],
+        "average_per_week": avg_result.collect()[0]["avg_per_week"]
+    }

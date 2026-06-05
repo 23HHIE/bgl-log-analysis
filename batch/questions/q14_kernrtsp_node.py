@@ -12,3 +12,4 @@ def run(df):
     )
 
     result.show(truncate=False)
+    return [row.asDict() for row in result.collect()]

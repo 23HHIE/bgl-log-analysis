@@ -9,3 +9,4 @@ def run(df):
     )
 
     result.show()
+    return [row.asDict() for row in result.collect()]

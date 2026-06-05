@@ -1,4 +1,7 @@
 import os
+import json
+import datetime
+import decimal
 from pyspark.sql import SparkSession
 from bgl_parser import load_bgl
 from questions import q10_top_days
@@ -11,21 +14,24 @@ def main():
 
     data_path = os.environ.get("DATA_PATH", "/data/BGL.log")
     df = load_bgl(spark, data_path)
+    output_path = os.environ.get("OUTPUT_PATH", "/output")
 
-    print("=== Question 10: Top 3 Days with Most Logs ===")
-    q10_top_days.run(df)
+    results = {}
+    results["q10_top_days"] = q10_top_days.run(df)
+    results["q14_kernrtsp_node"] = q14_kernrtsp_node.run(df)
+    results["q7_ddr_errors_weekly"] = q7_ddr_errors_weekly.run(df)
 
-    print("=== Question 14: Node with Most KERNRTSP Events ===")
-    q14_kernrtsp_node.run(df)
+    def json_serializer(obj):
+        if isinstance(obj, (datetime.date, datetime.datetime)):
+            return obj.isoformat()
+        if isinstance(obj, decimal.Decimal):
+            return float(obj)
+        raise TypeError(f"Type{type(obj)} not serializable")
 
-    print("=== Question 7: Average Weekly DDR Errors ===")
-    q7_ddr_errors_weekly.run(df)
-
-    # print("=== Question 18: Earliest Fatal Lustre Mount Failed ===")
-    # q18_lustre_fatal.run(df)
+    with open(f"{output_path}/results.json", "w") as f:
+        json.dump(results, f, indent=2, default=json_serializer)
 
     spark.stop()
 
 if __name__ == "__main__":
     main()
-
