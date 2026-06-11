@@ -50,3 +50,18 @@ services:
       - KAFKA_BROKER=kafka:9092
       - KAFKA_TOPIC=bgl-logs
       - PYTHONUNBUFFERED=1
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - kafka
+    volumes:
+      - ./output:/output
+      - ./api:/app
+    environment:
+      - KAFKA_BROKER=kafka:9092
+      - KAFKA_TOPIC=bgl-logs
+      - RESULTS_PATH=/output/results.json
+      - PYTHONUNBUFFERED=1
